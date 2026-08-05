@@ -1,0 +1,16 @@
+{
+  "name": "kindle-like",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "clear-cache": "node -e \"import db from './lib/db.js'; db.exec('DELETE FROM chapters; DELETE FROM search_cache;'); console.log('Cache cleared!');\""
+  },
+  "keywords": [],
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "express": "^5.2.1"
+  }
+}

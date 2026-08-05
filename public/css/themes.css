@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Color Palettes & Kindle Themes */
+:root {
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Literata', 'Merriweather', Georgia, serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --accent-primary: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-subtle: rgba(59, 130, 246, 0.15);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light Theme (Default Warm White) */
+[data-theme="light"] {
+  --bg-app: #f5f5f7;
+  --bg-card: #ffffff;
+  --bg-reader: #fcfbfa;
+  --bg-overlay: rgba(255, 255, 255, 0.85);
+  --bg-modal: #ffffff;
+  --text-main: #1d1d1f;
+  --text-muted: #6e6e73;
+  --text-reader: #222222;
+  --border-color: #e5e5ea;
+  --highlight-yellow: #fef08a;
+  --highlight-green: #bbf7d0;
+  --highlight-blue: #bfdbfe;
+  --highlight-pink: #fbcfe8;
+}
+
+/* Sepia Theme */
+[data-theme="sepia"] {
+  --bg-app: #e9e0d1;
+  --bg-card: #f4ebd9;
+  --bg-reader: #f4ecd8;
+  --bg-overlay: rgba(244, 236, 216, 0.9);
+  --bg-modal: #f4ebd9;
+  --text-main: #3d312a;
+  --text-muted: #7c6c5f;
+  --text-reader: #3b2f2f;
+  --border-color: #d8cbba;
+  --highlight-yellow: #fde047;
+  --highlight-green: #86efac;
+  --highlight-blue: #93c5fd;
+  --highlight-pink: #f472b6;
+}
+
+/* Dark Theme (Kindle Night) */
+[data-theme="dark"] {
+  --bg-app: #0d0e11;
+  --bg-card: #16181d;
+  --bg-reader: #121316;
+  --bg-overlay: rgba(18, 19, 22, 0.88);
+  --bg-modal: #1c1e24;
+  --text-main: #f1f3f5;
+  --text-muted: #9aa0a6;
+  --text-reader: #d1d5db;
+  --border-color: #2a2d35;
+  --highlight-yellow: #854d0e;
+  --highlight-green: #14532d;
+  --highlight-blue: #1e3a8a;
+  --highlight-pink: #831843;
+}
+
+/* E-Ink Theme (High Contrast Grayscale) */
+[data-theme="eink"] {
+  --bg-app: #e0e0e0;
+  --bg-card: #ffffff;
+  --bg-reader: #ffffff;
+  --bg-overlay: rgba(255, 255, 255, 0.95);
+  --bg-modal: #ffffff;
+  --text-main: #000000;
+  --text-muted: #444444;
+  --text-reader: #000000;
+  --border-color: #000000;
+  --highlight-yellow: #e5e5e5;
+  --highlight-green: #cccccc;
+  --highlight-blue: #b3b3b3;
+  --highlight-pink: #999999;
+}

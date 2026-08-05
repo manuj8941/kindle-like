@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kindle Web - Read Gutenberg Classics</title>
+  <meta name="description" content="A beautiful Kindle-like Web Reader for Project Gutenberg public domain eBooks.">
+  <link rel="stylesheet" href="/css/themes.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/reader.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="appNavbar">
+    <div class="brand" id="brandBtn">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+      </svg>
+      <span>Kindle Reader</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn active" id="navCatalogBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        Catalog
+      </button>
+      <button class="nav-btn" id="navLibraryBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+        My Library
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="app-container">
+    
+    <!-- Catalog View -->
+    <section class="view active" id="catalogView">
+      <div class="search-hero">
+        <h1>Discover Millions of Classic Books</h1>
+        <p>Read thousands of free Project Gutenberg eBooks in an authentic Kindle experience.</p>
+        <form class="search-bar" id="searchForm">
+          <input type="text" id="searchInput" placeholder="Search by title, author, or keyword (e.g. Pride and Prejudice)...">
+          <button type="submit">Search</button>
+        </form>
+        <div class="topics-list" id="topicsContainer">
+          <button class="topic-chip active" data-topic="">All</button>
+          <button class="topic-chip" data-topic="fiction">Fiction</button>
+          <button class="topic-chip" data-topic="romance">Romance</button>
+          <button class="topic-chip" data-topic="mystery">Mystery</button>
+          <button class="topic-chip" data-topic="science fiction">Sci-Fi</button>
+          <button class="topic-chip" data-topic="history">History</button>
+          <button class="topic-chip" data-topic="poetry">Poetry</button>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <span id="catalogSectionTitle">Popular Classics</span>
+      </div>
+
+      <div class="books-grid" id="catalogGrid">
+        <div class="spinner-container">
+          <div class="spinner"></div>
+          <p>Loading Gutenberg catalog...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- My Library View -->
+    <section class="view" id="libraryView">
+      <div class="section-title">
+        <span>My Bookshelf</span>
+      </div>
+      <div class="books-grid" id="libraryGrid">
+        <div class="empty-state">
+          <h3>Your library is empty</h3>
+          <p>Books you read or add to your library will appear here for easy access.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Kindle Reader Fullscreen View -->
+  <div class="reader-view mode-paginated" id="readerView" style="display: none;">
+    
+    <!-- Top Control Bar -->
+    <div class="reader-bar reader-top-bar" id="readerTopBar">
+      <button class="icon-btn" id="readerBackBtn" title="Back to Catalog">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <div class="reader-title-info" id="readerTitle">Book Title</div>
+      <div class="reader-controls">
+        <button class="icon-btn" id="toggleTocBtn" title="Table of Contents">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </button>
+        <button class="icon-btn" id="toggleHighlightsBtn" title="Highlights & Notes">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </button>
+        <button class="icon-btn" id="toggleSettingsBtn" title="Display Settings">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Click zones for side-tap page flipping -->
+    <div class="page-click-zone page-click-prev" id="prevZone"></div>
+    <div class="page-click-zone page-click-next" id="nextZone"></div>
+
+    <!-- Reader Stage Container -->
+    <div class="reader-viewport" id="readerViewport">
+      <div class="reader-stage">
+        <div class="reader-content" id="readerContent">
+          <!-- Dynamic Chapter Content Loaded Here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Control Bar -->
+    <div class="reader-bar reader-bottom-bar" id="readerBottomBar">
+      <button class="icon-btn" id="prevChapterBtn" title="Previous Chapter">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      
+      <div style="flex: 1; max-width: 400px; text-align: center; font-size: 0.85rem; color: var(--text-muted);">
+        <div id="readerPageInfo">Page 1 of 1</div>
+        <input type="range" id="progressSlider" min="0" max="100" value="0" style="width: 100%; cursor: pointer;">
+      </div>
+
+      <button class="icon-btn" id="nextChapterBtn" title="Next Chapter">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+
+    <!-- Settings Slide-out Drawer -->
+    <div class="reader-drawer" id="settingsDrawer">
+      <div class="drawer-header">
+        <span style="font-weight: 600;">Display Settings</span>
+        <button class="close-btn" id="closeSettingsBtn">&times;</button>
+      </div>
+      <div class="drawer-body">
+        <div class="setting-group">
+          <div class="setting-label">Theme</div>
+          <div class="setting-options-grid">
+            <button class="theme-opt-btn" data-set-theme="light" style="background:#fcfbfa; color:#222;">Light</button>
+            <button class="theme-opt-btn" data-set-theme="sepia" style="background:#f4ecd8; color:#3b2f2f;">Sepia</button>
+            <button class="theme-opt-btn" data-set-theme="dark" style="background:#121316; color:#e0e0e0;">Dark</button>
+            <button class="theme-opt-btn" data-set-theme="eink" style="background:#ffffff; color:#000; border:2px solid #000;">E-Ink</button>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-label">Font Family</div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="theme-opt-btn" data-set-font="serif" style="flex:1; font-family: var(--font-serif);">Serif</button>
+            <button class="theme-opt-btn" data-set-font="sans" style="flex:1; font-family: var(--font-sans);">Sans</button>
+            <button class="theme-opt-btn" data-set-font="mono" style="flex:1; font-family: var(--font-mono);">Mono</button>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-label">Font Size</div>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <span style="font-size: 0.85rem;">A-</span>
+            <input type="range" id="fontSizeSlider" min="14" max="28" value="18" style="flex:1;">
+            <span style="font-size: 1.25rem;">A+</span>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-label">Reading Mode</div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="theme-opt-btn" id="modePaginatedBtn" style="flex:1;">Paginated (Kindle)</button>
+            <button class="theme-opt-btn" id="modeScrollBtn" style="flex:1;">Continuous Scroll</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table of Contents Drawer -->
+    <div class="reader-drawer" id="tocDrawer">
+      <div class="drawer-header">
+        <span style="font-weight: 600;">Table of Contents</span>
+        <button class="close-btn" id="closeTocBtn">&times;</button>
+      </div>
+      <div class="drawer-body" id="tocList">
+        <!-- Dynamic Chapter List -->
+      </div>
+    </div>
+
+    <!-- Highlights Drawer -->
+    <div class="reader-drawer" id="highlightsDrawer">
+      <div class="drawer-header">
+        <span style="font-weight: 600;">My Highlights & Notes</span>
+        <button class="close-btn" id="closeHighlightsBtn">&times;</button>
+      </div>
+      <div class="drawer-body" id="highlightsList">
+        <!-- Dynamic Highlights List -->
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
