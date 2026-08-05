@@ -7,10 +7,6 @@ kindle.db-wal
 kindle.db-shm
 *.db
 
-# Temporary test scripts
-check_images.js
-inspect_alice.js
-
 # OS files
 .DS_Store
 Thumbs.db
